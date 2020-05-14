@@ -1,0 +1,6 @@
+version: '3.2'
+services:
+    plan:
+        image: barryhe/plan
+        ports:
+            - "5000:5000"
