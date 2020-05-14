@@ -56,6 +56,24 @@ def get_user_by_id(u_id):
     return u.serialize()
 
 
+def update_user_limit(u_id, limit):
+    u = User.query.filter_by(id=u_id).first()
+    if u is None:
+        return None
+    u.limit = limit
+    db.session.commit()
+    return u.serialize()
+
+
+def update_user_spent(u_id, spent):
+    u = User.query.filter_by(id=u_id).first()
+    if u is None:
+        return None
+    u.spent += spent
+    db.session.commit()
+    return u.serialize()
+
+
 def delete_user_by_id(u_id):
     u = User.query.filter_by(id=u_id).first()
     if u is None:

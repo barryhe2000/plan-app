@@ -4,7 +4,7 @@ import dao
 from db import db
 import os
 
-SECRET_KEY = os.environ["SECRET_KEY"]
+#SECRET_KEY = os.environ["SECRET_KEY"]
 
 app = Flask(__name__)
 db_filename = "plan.db"
@@ -66,12 +66,14 @@ def create_transaction(c_id):
     if c is None:
         return failure_response("User not found!")
     body = json.loads(request.data)
+    cost = body.get("cost")
     transaction = dao.create_transaction(
         body.get("title"),
         body.get("buy_date"),
-        body.get("cost"),
+        cost,
         c_id
     )
+    dao.update_user_spent(c_id, cost)
     return success_response(transaction)
 
 # User

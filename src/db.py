@@ -4,6 +4,7 @@ db = SQLAlchemy()
 cat_table = db.Table("c_table", db.Model.metadata,
     db.Column("user_id", db.Integer, db.ForeignKey("user.id")),
     db.Column("category_id", db.Integer, db.ForeignKey("category.id"))
+)
 
 class Category(db.Model):
     __tablename__="category"
